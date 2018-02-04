@@ -21,7 +21,7 @@ func TestEquality(t *testing.T) {
 	assert.Equal(t, money.NewFranc(5).Equals(money.NewFranc(5)), true)
 	assert.Equal(t, money.NewFranc(5).Equals(money.NewFranc(6)), false)
 
-	// assert.Equal(t, money.NewDoller(5).Equals(money.NewFranc(5)), false)
+	assert.Equal(t, money.NewDoller(5).Equals(money.NewFranc(5)), false)
 }
 
 func TestCurrency(t *testing.T) {

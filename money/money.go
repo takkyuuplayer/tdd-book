@@ -20,7 +20,7 @@ func (m *Money) Currency() string {
 
 func (m *Money) Equals(obj interface{}) bool {
 	m2 := obj.(IMoney)
-	return m.Amount() == m2.Amount()
+	return m.Amount() == m2.Amount() && m.Currency() == m2.Currency()
 }
 
 type Doller struct {
