@@ -34,3 +34,13 @@ func TestSimpleAddition(t *testing.T) {
 
 	assert.Equal(t, reduced, money.Doller(10))
 }
+
+func TestPlusReturnsSum(t *testing.T) {
+	five := money.Doller(5)
+	result := five.Plus(five)
+
+	sum := result.(*money.Sum)
+
+	assert.Equal(t, five, sum.Augend)
+	assert.Equal(t, five, sum.Addend)
+}
