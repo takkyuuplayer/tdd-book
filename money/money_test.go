@@ -1,33 +1,22 @@
-package money
+package money_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/takkyuuplayer/tdd-book/money"
+)
 
 func TestMultipulation(t *testing.T) {
-	five := Doller{5}
-	product := five.Times(2)
+	five := money.NewDoller(5)
 
-	if product.Amount != 10 {
-		t.Errorf(`product.Amount = %#v, want %#v`, product.Amount, 10)
-	}
-
-	product = five.Times(3)
-
-	if product.Amount != 15 {
-		t.Errorf(`product.Amount = %#v, want %#v`, product.Amount, 15)
-	}
+	assert.Equal(t, money.NewDoller(10), five.Times(2))
+	assert.Equal(t, money.NewDoller(15), five.Times(3))
 }
 
 func TestEquality(t *testing.T) {
-	five := &Doller{5}
-	five2 := &Doller{5}
+	five := money.NewDoller(5)
 
-	if five.Equals(five2) != true {
-		t.Errorf(`five.Equals(five2) = %#v, want %#v`, five.Equals(five2), true)
-	}
-
-	six := &Doller{6}
-
-	if five.Equals(six) != false {
-		t.Errorf(`five.Equals(six) = %#v, want %#v`, five.Equals(six), false)
-	}
+	assert.Equal(t, five.Equals(money.NewDoller(5)), true)
+	assert.Equal(t, five.Equals(money.NewDoller(6)), false)
 }
