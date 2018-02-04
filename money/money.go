@@ -30,10 +30,10 @@ func (m *Money) Times(multiplier int) *Money {
 	}
 }
 
-func NewDoller(amount int) *Money {
+func Doller(amount int) *Money {
 	return &Money{amount, "USD"}
 }
 
-func NewFranc(amount int) *Money {
+func Franc(amount int) *Money {
 	return &Money{amount, "CHF"}
 }

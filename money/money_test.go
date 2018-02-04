@@ -8,20 +8,20 @@ import (
 )
 
 func TestMultipulation(t *testing.T) {
-	five := money.NewDoller(5)
+	five := money.Doller(5)
 
-	assert.Equal(t, money.NewDoller(10), five.Times(2))
-	assert.Equal(t, money.NewDoller(15), five.Times(3))
+	assert.Equal(t, money.Doller(10), five.Times(2))
+	assert.Equal(t, money.Doller(15), five.Times(3))
 }
 
 func TestEquality(t *testing.T) {
-	assert.Equal(t, money.NewDoller(5).Equals(money.NewDoller(5)), true)
-	assert.Equal(t, money.NewDoller(5).Equals(money.NewDoller(6)), false)
+	assert.Equal(t, money.Doller(5).Equals(money.Doller(5)), true)
+	assert.Equal(t, money.Doller(5).Equals(money.Doller(6)), false)
 
-	assert.Equal(t, money.NewDoller(5).Equals(money.NewFranc(5)), false)
+	assert.Equal(t, money.Doller(5).Equals(money.Franc(5)), false)
 }
 
 func TestCurrency(t *testing.T) {
-	assert.Equal(t, money.NewDoller(5).Currency(), "USD")
-	assert.Equal(t, money.NewFranc(5).Currency(), "CHF")
+	assert.Equal(t, money.Doller(5).Currency(), "USD")
+	assert.Equal(t, money.Franc(5).Currency(), "CHF")
 }
