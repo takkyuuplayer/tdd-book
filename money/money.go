@@ -28,7 +28,7 @@ type Pair struct {
 }
 
 func (s *Sum) reduce(b *Bank, currency string) *Money {
-	amount := s.Augend.amount + s.Addend.amount
+	amount := s.Augend.reduce(b, currency).amount + s.Addend.reduce(b, currency).amount
 	return &Money{
 		amount,
 		currency,
