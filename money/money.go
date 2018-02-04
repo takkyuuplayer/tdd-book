@@ -21,6 +21,10 @@ type Doller struct {
 	Money
 }
 
+func (d *Doller) Currency() string {
+	return "USD"
+}
+
 func (d *Doller) amount() int {
 	return d.Money.amount
 }
@@ -35,6 +39,10 @@ func (d *Doller) Times(multiplier int) *Doller {
 
 type Franc struct {
 	Money
+}
+
+func (f *Franc) Currency() string {
+	return "CHF"
 }
 
 func (f *Franc) amount() int {
