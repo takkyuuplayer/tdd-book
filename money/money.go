@@ -19,8 +19,8 @@ type Expression interface {
 }
 
 type Sum struct {
-	Augend *Money
-	Addend *Money
+	Augend Expression
+	Addend Expression
 }
 
 type Pair struct {
@@ -70,14 +70,14 @@ func (m *Money) Equals(obj interface{}) bool {
 	return m.Amount() == m2.Amount() && m.Currency() == m2.Currency()
 }
 
-func (m *Money) Times(multiplier int) *Money {
+func (m *Money) Times(multiplier int) Expression {
 	return &Money{
 		m.Amount() * multiplier,
 		m.Currency(),
 	}
 }
 
-func (m *Money) Plus(m2 *Money) Expression {
+func (m *Money) Plus(m2 Expression) Expression {
 	return &Sum{
 		m,
 		m2,
