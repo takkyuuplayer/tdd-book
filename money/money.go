@@ -13,6 +13,7 @@ type IMoney interface {
 type Bank struct{}
 
 type Expression interface {
+	reduce(currency string) *Money
 }
 
 type Sum struct {
@@ -29,17 +30,15 @@ func (s *Sum) reduce(currency string) *Money {
 }
 
 func (b *Bank) Reduce(source Expression, currency string) *Money {
-	money, ok := source.(*Money)
-	if ok {
-		return money
-	}
-
-	sum := source.(*Sum)
-	return sum.reduce(currency)
+	return source.reduce(currency)
 }
 
 func (m *Money) Amount() int {
 	return m.amount
+}
+
+func (m *Money) reduce(currency string) *Money {
+	return m
 }
 
 func (m *Money) Currency() string {
