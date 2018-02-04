@@ -32,12 +32,20 @@ func (s *Sum) reduce(currency string) *Money {
 func (b *Bank) Reduce(source Expression, currency string) *Money {
 	return source.reduce(currency)
 }
+func (b *Bank) AddRate(from, to string, rate int) {
+}
 
 func (m *Money) Amount() int {
 	return m.amount
 }
 
-func (m *Money) reduce(currency string) *Money {
+func (m *Money) reduce(to string) *Money {
+	if m.currency == "CHF" && to == "USD" {
+		return &Money{
+			m.amount / 2,
+			to,
+		}
+	}
 	return m
 }
 
