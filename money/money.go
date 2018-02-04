@@ -20,11 +20,22 @@ type Sum struct {
 	Addend *Money
 }
 
-func (b *Bank) Reduce(source Expression, currency string) *Money {
-	sum := source.(*Sum)
-	amount := sum.Augend.amount + sum.Addend.amount
+func (s *Sum) reduce(currency string) *Money {
+	amount := s.Augend.amount + s.Addend.amount
+	return &Money{
+		amount,
+		currency,
+	}
+}
 
-	return &Money{amount, currency}
+func (b *Bank) Reduce(source Expression, currency string) *Money {
+	money, ok := source.(*Money)
+	if ok {
+		return money
+	}
+
+	sum := source.(*Sum)
+	return sum.reduce(currency)
 }
 
 func (m *Money) Amount() int {
