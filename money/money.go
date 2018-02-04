@@ -17,6 +17,7 @@ type Bank struct {
 type Expression interface {
 	reduce(b *Bank, currency string) *Money
 	Plus(addend Expression) Expression
+	Times(multiplier int) Expression
 }
 
 type Sum struct {
@@ -38,6 +39,13 @@ func (s *Sum) reduce(b *Bank, currency string) *Money {
 
 func (s *Sum) Plus(addend Expression) Expression {
 	return &Sum{s, addend}
+}
+
+func (s *Sum) Times(multiplier int) Expression {
+	return &Sum{
+		s.Augend.Times(multiplier),
+		s.Addend.Times(multiplier),
+	}
 }
 
 func (b *Bank) Reduce(source Expression, currency string) *Money {
