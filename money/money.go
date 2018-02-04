@@ -37,7 +37,7 @@ func (s *Sum) reduce(b *Bank, currency string) *Money {
 }
 
 func (s *Sum) Plus(addend Expression) Expression {
-	return nil
+	return &Sum{s, addend}
 }
 
 func (b *Bank) Reduce(source Expression, currency string) *Money {

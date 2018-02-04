@@ -86,3 +86,14 @@ func TestMixedAddition(t *testing.T) {
 
 	assert.Equal(t, result, money.Doller(10))
 }
+
+func TestSumPlusMoney(t *testing.T) {
+	fiveBucks := money.Doller(5)
+	tenFrancs := money.Franc(10)
+	bank := money.NewBank()
+	bank.AddRate("CHF", "USD", 2)
+	sum := (&money.Sum{fiveBucks, tenFrancs}).Plus(fiveBucks)
+	result := bank.Reduce(sum, "USD")
+
+	assert.Equal(t, result, money.Doller(15))
+}
