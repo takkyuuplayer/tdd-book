@@ -1,15 +1,21 @@
 package money
 
 type Money struct {
-	amount int
+	amount   int
+	currency string
 }
 
 type IMoney interface {
 	Amount() int
+	Currency() string
 }
 
 func (m *Money) Amount() int {
 	return m.amount
+}
+
+func (m *Money) Currency() string {
+	return m.currency
 }
 
 func (m *Money) Equals(obj interface{}) bool {
@@ -19,11 +25,6 @@ func (m *Money) Equals(obj interface{}) bool {
 
 type Doller struct {
 	Money
-	currency string
-}
-
-func (d *Doller) Currency() string {
-	return d.currency
 }
 
 func (d *Doller) amount() int {
@@ -31,7 +32,7 @@ func (d *Doller) amount() int {
 }
 
 func NewDoller(amount int) *Doller {
-	return &Doller{Money{amount: amount}, "USD"}
+	return &Doller{Money{amount, "USD"}}
 }
 
 func (d *Doller) Times(multiplier int) *Doller {
@@ -40,11 +41,6 @@ func (d *Doller) Times(multiplier int) *Doller {
 
 type Franc struct {
 	Money
-	currency string
-}
-
-func (f *Franc) Currency() string {
-	return f.currency
 }
 
 func (f *Franc) amount() int {
@@ -52,7 +48,7 @@ func (f *Franc) amount() int {
 }
 
 func NewFranc(amount int) *Franc {
-	return &Franc{Money{amount: amount}, "CHF"}
+	return &Franc{Money{amount, "CHF"}}
 }
 
 func (d *Franc) Times(multiplier int) *Franc {
