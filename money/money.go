@@ -4,6 +4,6 @@ type Doller struct {
 	Amount int
 }
 
-func (d *Doller) Times(multiplier int) {
-	d.Amount *= multiplier
+func (d *Doller) Times(multiplier int) *Doller {
+	return &Doller{d.Amount * multiplier}
 }
