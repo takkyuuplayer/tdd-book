@@ -12,18 +12,13 @@ func TestMultipulation(t *testing.T) {
 
 	assert.Equal(t, money.Doller(10), five.Times(2))
 	assert.Equal(t, money.Doller(15), five.Times(3))
-}
 
-func TestEquality(t *testing.T) {
-	assert.Equal(t, money.Doller(5).Equals(money.Doller(5)), true)
-	assert.Equal(t, money.Doller(5).Equals(money.Doller(6)), false)
-
-	assert.Equal(t, money.Doller(5).Equals(money.Franc(5)), false)
+	assert.NotEqual(t, money.Doller(5), money.Franc(5))
 }
 
 func TestCurrency(t *testing.T) {
-	assert.Equal(t, money.Doller(5).Currency(), "USD")
-	assert.Equal(t, money.Franc(5).Currency(), "CHF")
+	assert.Equal(t, money.Doller(5).Currency, "USD")
+	assert.Equal(t, money.Franc(5).Currency, "CHF")
 }
 
 func TestSimpleAddition(t *testing.T) {
