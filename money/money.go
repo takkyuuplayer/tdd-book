@@ -10,7 +10,9 @@ type IMoney interface {
 	Currency() string
 }
 
-type Bank struct{}
+type Bank struct {
+	rates map[Pair]int
+}
 
 type Expression interface {
 	reduce(b *Bank, currency string) *Money
@@ -19,6 +21,10 @@ type Expression interface {
 type Sum struct {
 	Augend *Money
 	Addend *Money
+}
+
+type Pair struct {
+	from, to string
 }
 
 func (s *Sum) reduce(b *Bank, currency string) *Money {
@@ -33,13 +39,14 @@ func (b *Bank) Reduce(source Expression, currency string) *Money {
 	return source.reduce(b, currency)
 }
 func (b *Bank) AddRate(from, to string, rate int) {
+	b.rates[Pair{from, to}] = rate
 }
 
 func (b *Bank) Rate(from, to string) int {
-	if from == "CHF" && to == "USD" {
-		return 2
+	if from == to {
+		return 1
 	}
-	return 1
+	return b.rates[Pair{from, to}]
 }
 
 func (m *Money) Amount() int {
@@ -83,4 +90,8 @@ func Doller(amount int) *Money {
 
 func Franc(amount int) *Money {
 	return &Money{amount, "CHF"}
+}
+
+func NewBank() *Bank {
+	return &Bank{make(map[Pair]int)}
 }
