@@ -23,34 +23,17 @@ func (m *Money) Equals(obj interface{}) bool {
 	return m.Amount() == m2.Amount() && m.Currency() == m2.Currency()
 }
 
-type Doller struct {
-	Money
+func (m *Money) Times(multiplier int) *Money {
+	return &Money{
+		m.Amount() * multiplier,
+		m.Currency(),
+	}
 }
 
-func (d *Doller) amount() int {
-	return d.Money.amount
+func NewDoller(amount int) *Money {
+	return &Money{amount, "USD"}
 }
 
-func NewDoller(amount int) *Doller {
-	return &Doller{Money{amount, "USD"}}
-}
-
-func (d *Doller) Times(multiplier int) *Doller {
-	return NewDoller(d.amount() * multiplier)
-}
-
-type Franc struct {
-	Money
-}
-
-func (f *Franc) amount() int {
-	return f.Money.amount
-}
-
-func NewFranc(amount int) *Franc {
-	return &Franc{Money{amount, "CHF"}}
-}
-
-func (d *Franc) Times(multiplier int) *Franc {
-	return NewFranc(d.amount() * multiplier)
+func NewFranc(amount int) *Money {
+	return &Money{amount, "CHF"}
 }
