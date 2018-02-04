@@ -30,6 +30,13 @@ func (m *Money) Times(multiplier int) *Money {
 	}
 }
 
+func (m *Money) Plus(m2 *Money) *Money {
+	return &Money{
+		m.Amount() + m2.Amount(),
+		m.Currency(),
+	}
+}
+
 func Doller(amount int) *Money {
 	return &Money{amount, "USD"}
 }
