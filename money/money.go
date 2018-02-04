@@ -19,10 +19,11 @@ func (m *Money) Equals(obj interface{}) bool {
 
 type Doller struct {
 	Money
+	currency string
 }
 
 func (d *Doller) Currency() string {
-	return "USD"
+	return d.currency
 }
 
 func (d *Doller) amount() int {
@@ -30,7 +31,7 @@ func (d *Doller) amount() int {
 }
 
 func NewDoller(amount int) *Doller {
-	return &Doller{Money{amount: amount}}
+	return &Doller{Money{amount: amount}, "USD"}
 }
 
 func (d *Doller) Times(multiplier int) *Doller {
@@ -39,10 +40,11 @@ func (d *Doller) Times(multiplier int) *Doller {
 
 type Franc struct {
 	Money
+	currency string
 }
 
 func (f *Franc) Currency() string {
-	return "CHF"
+	return f.currency
 }
 
 func (f *Franc) amount() int {
@@ -50,7 +52,7 @@ func (f *Franc) amount() int {
 }
 
 func NewFranc(amount int) *Franc {
-	return &Franc{Money{amount: amount}}
+	return &Franc{Money{amount: amount}, "CHF"}
 }
 
 func (d *Franc) Times(multiplier int) *Franc {
