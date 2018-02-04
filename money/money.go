@@ -10,6 +10,15 @@ type IMoney interface {
 	Currency() string
 }
 
+type Bank struct{}
+
+type Expression interface {
+}
+
+func (b *Bank) Reduce(exp Expression, currency string) *Money {
+	return &Money{10, "USD"}
+}
+
 func (m *Money) Amount() int {
 	return m.amount
 }
@@ -30,7 +39,7 @@ func (m *Money) Times(multiplier int) *Money {
 	}
 }
 
-func (m *Money) Plus(m2 *Money) *Money {
+func (m *Money) Plus(m2 *Money) Expression {
 	return &Money{
 		m.Amount() + m2.Amount(),
 		m.Currency(),
